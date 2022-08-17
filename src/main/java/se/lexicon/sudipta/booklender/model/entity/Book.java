@@ -28,5 +28,12 @@ public class Book {
     private BigDecimal finePerDays;
     private String description;
 
-
+    public Book(String title, boolean available, boolean reserved, int maxLoanDays, BigDecimal finePerDays, String description) {
+        this.title = title;
+        this.available = available;
+        this.reserved = reserved;
+        this.maxLoanDays = maxLoanDays;
+        this.finePerDays = finePerDays;
+        this.description = description;
+    }
 }
