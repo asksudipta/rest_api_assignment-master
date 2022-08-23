@@ -8,6 +8,9 @@ public class RestApiAssignmentApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RestApiAssignmentApplication.class, args);
+
+
     }
+
 
 }

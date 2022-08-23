@@ -2,7 +2,10 @@ package se.lexicon.sudipta.booklender.model.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
 
@@ -15,25 +18,25 @@ import java.math.BigDecimal;
 
 @Entity
 public class Book {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bookId;
 
-    @Column(nullable = false)
-    private  String title;
+    private String title;
     private boolean available;
     private boolean reserved;
     private int maxLoanDays;
     private BigDecimal finePerDays;
     private String description;
 
-    public Book(String title, boolean available, boolean reserved, int maxLoanDays, BigDecimal finePerDays, String description) {
-        this.title = title;
-        this.available = available;
-        this.reserved = reserved;
-        this.maxLoanDays = maxLoanDays;
-        this.finePerDays = finePerDays;
-        this.description = description;
+
+    public Book(String title, int maxLoanDays, BigDecimal finePerDays, String description) {
+        setTitle(title);
+        setAvailable(true);
+        setReserved(false);
+        setMaxLoanDays(maxLoanDays);
+        setFinePerDays(finePerDays);
+        setDescription(description);
     }
+
 }
