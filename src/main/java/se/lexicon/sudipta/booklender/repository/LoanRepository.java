@@ -13,5 +13,5 @@ public interface LoanRepository extends CrudRepository<Loan, Integer> {
 
     Optional<Loan> findByBookId(Integer bookId);
 
-    void findByConcludedStatus(@Param("status")boolean status);
+    Optional<Loan> findByConcludedStatus(boolean status);
 }
