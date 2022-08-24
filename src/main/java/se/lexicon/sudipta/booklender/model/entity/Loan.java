@@ -2,6 +2,7 @@ package se.lexicon.sudipta.booklender.model.entity;
 
 import lombok.*;
 import org.hibernate.boot.model.naming.IllegalIdentifierException;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
