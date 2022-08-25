@@ -11,7 +11,10 @@ import java.util.Optional;
 public interface BookRepository extends CrudRepository<Book, Integer> {
 
     Optional<Book> findByTitle(String title);
-    Optional<Book> findByReservedStatus(boolean status);
-    Optional<Book> findByAvailableStatus(boolean status);
+
+    //Find by reserved status
+    Optional<Book> findByReserved(boolean status);
+    //Find by available status
+    Optional<Book> findByAvailable(boolean status);
 
 }
