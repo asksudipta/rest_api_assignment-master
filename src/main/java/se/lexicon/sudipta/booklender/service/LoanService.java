@@ -11,17 +11,17 @@ import java.util.List;
 
 public interface LoanService {
 
-    LoanDto findById(Integer loanId);
+    LoanDto findById(Integer loanId) throws ObjectNotFoundException;
 
-    List<LoanDto> findByBookId(BookDto bookId);
+    List<LoanDto> findByBookId(Integer bookId) throws ObjectNotFoundException;
 
-    List<LoanDto> findByUserId(LibraryUserDto userId);
+    List<LoanDto> findByUserId(Integer userId) throws ObjectNotFoundException;
 
     List<LoanDto> findByConcluded(boolean status);
 
     List<LoanDto> findAll();
 
-    LoanDto create(LoanDto dto)throws ObjectDuplicateException;
+    LoanDto create(LoanDto dto) throws ObjectDuplicateException, ObjectNotFoundException;
 
     void update(LoanDto dto);
 

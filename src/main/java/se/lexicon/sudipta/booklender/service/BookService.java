@@ -10,7 +10,7 @@ public interface BookService {
 
     List<BookDto> findByReserved(boolean reserved);
     List<BookDto>findByAvailable(boolean available);
-    List<BookDto> findByTitle(String title)throws ObjectNotFoundException;
+   public List<BookDto> findByTitle(String title)throws ObjectNotFoundException;
     BookDto findById(Integer bookId)throws ObjectNotFoundException;
     List<BookDto>findAll();
     BookDto create(BookDto dto) throws ObjectDuplicateException;

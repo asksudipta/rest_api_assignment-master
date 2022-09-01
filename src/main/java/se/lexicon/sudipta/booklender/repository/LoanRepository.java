@@ -3,17 +3,18 @@ package se.lexicon.sudipta.booklender.repository;
 import org.springframework.data.repository.CrudRepository;
 import se.lexicon.sudipta.booklender.model.entity.Loan;
 
-import java.util.Optional;
+import java.util.List;
+
 
 public interface LoanRepository extends CrudRepository<Loan, Integer> {
 
     //Find by userId
-    Optional<Loan> findByLoanTakerUserId(Integer userId);
+    List<Loan> findByLoanTakerUserId(Integer userId);
 
    //Find by bookId
-    Optional<Loan>findByBookBookId(Integer bookId);
+    List<Loan> findByBookBookId(Integer bookId);
 
     //Find by terminated status
-    Optional<Loan>findByConcluded(boolean status);
+    List<Loan>findByConcluded(boolean status);
 
 }
