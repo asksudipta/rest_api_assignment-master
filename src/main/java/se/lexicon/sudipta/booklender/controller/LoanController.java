@@ -7,13 +7,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import se.lexicon.sudipta.booklender.exception.ObjectDuplicateException;
 import se.lexicon.sudipta.booklender.exception.ObjectNotFoundException;
-import se.lexicon.sudipta.booklender.model.dto.BookDto;
 import se.lexicon.sudipta.booklender.model.dto.LoanDto;
-import se.lexicon.sudipta.booklender.model.entity.Loan;
 import se.lexicon.sudipta.booklender.service.LoanService;
 
 import javax.validation.Valid;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("api/bookLender/loan")
@@ -49,8 +50,46 @@ public class LoanController {
         loanService.delete(loanId);
         return ResponseEntity.noContent().build();//code 204 for delete
     }
+    //FindById
+    @GetMapping("/{loanId}")
+    public ResponseEntity<LoanDto> findById (@PathVariable("loanId") Integer loanId) throws ObjectNotFoundException {
+        System.out.println("loanId"+ loanId);
+        LoanDto loanDtoListById=loanService.findById(loanId);
+        return ResponseEntity.ok().body(loanDtoListById);
 
-    //FindAll
+    }
+    @GetMapping("/find")
+    public ResponseEntity<List<LoanDto>> find(
+            @RequestParam(name = "findAll", defaultValue = "false") final String findAll,
+            @RequestParam(name = "concluded", defaultValue = "All") final String concluded,
+            @RequestParam(name = "userId", defaultValue = "All") final String userId,
+            @RequestParam(name = "bookId", defaultValue = "All") final String bookId) throws ObjectNotFoundException {
+
+        if (findAll.equals("True")) {
+           List<LoanDto> loanDtoList = loanService.findAll();
+            return ResponseEntity.ok().body(loanDtoList);
+        }
+        else if (!Objects.equals(concluded, "All")) {
+            System.out.println("available" + concluded);
+            List<LoanDto> loanDtoList = loanService.findByConcluded(Boolean.parseBoolean(concluded));
+            return ResponseEntity.ok().body(loanDtoList);
+        }
+        else if (!userId.equals("All")) {
+            System.out.println("userId"+userId);
+            List<LoanDto> loanDtoList=loanService.findByUserId(Integer.valueOf(userId));
+            return ResponseEntity.ok().body(loanDtoList);
+        }
+        else if (!bookId.equals("All")) {
+            System.out.println("userId"+userId);
+            List<LoanDto>loanDtoList=loanService.findByBookId(Integer.valueOf(bookId));
+            return ResponseEntity.ok().body(loanDtoList);
+        }
+        return ResponseEntity.badRequest().build();
+
+    }
+     /*
+     //FindAll
+
     @GetMapping("/")
     public ResponseEntity<List<LoanDto>> findAll(){
         System.out.println("### FindAllLoan has been executed!");
@@ -79,16 +118,7 @@ public class LoanController {
         System.out.println("bookId"+ bookId);
         List<LoanDto> loanDtoBookIdList=loanService.findByBookId(bookId);
         return ResponseEntity.ok().body(loanDtoBookIdList);
-
     }
-
-    //FindById
-    public ResponseEntity<LoanDto> findById (@PathVariable("loanId") Integer loanId) throws ObjectNotFoundException {
-        System.out.println("loanId"+ loanId);
-        LoanDto loanDtoListById=loanService.findById(loanId);
-        return ResponseEntity.ok().body(loanDtoListById);
-
-    }
-
+ */
 
 }

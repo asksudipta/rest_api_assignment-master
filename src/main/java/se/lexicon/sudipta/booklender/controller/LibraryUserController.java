@@ -44,7 +44,7 @@ public class LibraryUserController {
     }
 
     //FindAll
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<LibraryUserDto>> findAll() {
         return ResponseEntity.ok().body(libraryUserService.findAll());
     }
